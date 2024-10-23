@@ -9,7 +9,6 @@
         body {
             background-color: #282c34;
             font-family: 'Arabica', sans-serif;
-
             text-align: center;
             margin: 0;
             padding: 0;
@@ -60,7 +59,8 @@
         }
 
         img {
-            width: 300px;
+            width: 100%; /* ปรับให้เต็มความกว้างของหน้าจอ */
+            max-width: 300px; /* ไม่ให้กว้างเกิน 300px */
             height: auto;
             border-radius: 15px;
             margin: 20px;
@@ -86,7 +86,6 @@
     </div>
 
     <audio id="lightSound" src="hbd.mp3" preload="auto"></audio>
-
 
     <script>
         document.getElementById("lightButton").onclick = function() {
@@ -120,5 +119,3 @@
 
 </body>
 </html>
-
-
