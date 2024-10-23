@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>เซอร์ไพรส์วันเกิด</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arabica&display=swap" rel="stylesheet"> <!-- เพิ่มฟอนต์ Arabica -->
+    <style>
+        body {
+            background-color: #282c34;
+            font-family: 'Arabica', sans-serif; /* เปลี่ยนฟอนต์เป็น Arabica */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: white;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.5s;
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin: 20px 0;
+            color: #ff69b4;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            opacity: 0; /* เริ่มต้นซ่อนข้อความเซอร์ไพรส์ */
+        }
+
+        p {
+            font-size: 1.5em;
+            margin: 20px 0;
+            opacity: 0; /* ซ่อนข้อความก่อน */
+            transition: opacity 1s; /* เอฟเฟกต์การปรากฏ */
+            line-height: 1.5;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            font-family: 'Arabica', sans-serif; /* เปลี่ยนฟอนต์ปุ่มเป็น Arabica */
+            background-color: #1db954; /* สีเขียว Spotify */
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            width: 150px;
+        }
+
+        button:hover {
+            background-color: #1aa34a; /* สีเขียวเข้ม */
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #1aa34a; /* เพิ่มเงาเมื่อเมาส์วาง */
+        }
+
+        button:active {
+            transform: scale(0.95); /* ขยายปุ่มเมื่อถูกกด */
+            box-shadow: 0 0 10px #1aa34a; /* ลดเงาเมื่อกด */
+        }
+
+        .container {
+            display: none; /* เริ่มต้นซ่อน container */
+            margin-top: 30px;
+            position: relative; /* ตำแหน่งสำหรับแผ่นเสียง */
+        }
+
+        .record {
+            width: 200px; /* ขนาดของแผ่นเสียง */
+            height: 200px; /* ขนาดของแผ่นเสียง */
+            border-radius: 50%; /* ทำให้เป็นรูปวงกลม */
+            background: radial-gradient(circle, #000 30%, #444 100%); /* สีของแผ่นเสียง */
+            position: relative;
+            animation: spin 2s linear infinite; /* หมุนตลอดเวลา */
+            display: none; /* เริ่มต้นซ่อนแผ่นเสียง */
+        }
+
+        .record::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px; /* ขนาดของจุกกลางแผ่นเสียง */
+            height: 20px; /* ขนาดของจุกกลางแผ่นเสียง */
+            background-color: #1db954; /* สีจุกกลาง */
+            border-radius: 50%; /* ทำให้เป็นวงกลม */
+            transform: translate(-50%, -50%); /* จัดตำแหน่งกลาง */
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        img {
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            margin: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: opacity 1s; /* เอฟเฟกต์การปรากฏ */
+            opacity: 0; /* เริ่มต้นซ่อนรูป */
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="surpriseMessage">🎉 สุขสันต์วันเกิดที่รัก! 🎉</h1>
+    <p id="introText">วันนี้เป็นวันพิเศษของเธอ</p> <!-- แสดงข้อความทั้งหมด -->
+
+    <button id="lightButton">เปิดไฟ</button>
+
+    <div class="container" id="surpriseContainer">
+        <div class="record" id="record"></div> <!-- แผ่นเสียง -->
+        <img src="S__6029319.jpg" alt="รูปของเรา" id="surpriseImage">
+    </div>
+
+    <!-- แท็ก audio สำหรับเสียงเมื่อเปิดไฟ -->
+    <audio id="lightSound" src="https://www.dropbox.com/scl/fi/3h95prlzjet9lsb0h51u5/11111111.wav?rlkey=1bkqx97kc1a65nuw68mmbqo5d&st=9rvxolvt&dl=0" preload="auto"></audio>
+
+
+    <script>
+        document.getElementById("lightButton").onclick = function() {
+            document.body.style.backgroundColor = "#87CEEB"; // เปลี่ยนพื้นหลังเป็นฟ้า
+            
+            // เล่นเสียงเมื่อเปิดไฟ
+            document.getElementById("lightSound").play();
+
+            // แสดงข้อความเซอร์ไพรส์
+            let surpriseMessage = document.getElementById("surpriseMessage");
+            surpriseMessage.style.opacity = 1; // ทำให้ข้อความปรากฏ
+            surpriseMessage.style.transition = "opacity 2s"; // ตั้งเวลาให้การปรากฏช้า
+            surpriseMessage.style.display = "block"; // แสดงข้อความเซอร์ไพรส์
+            
+            document.getElementById("lightButton").style.display = "none"; // ซ่อนปุ่ม
+            
+            // แสดงข้อความที่สองหลังจากข้อความเซอร์ไพรส์
+            setTimeout(function() {
+                const introText = document.getElementById("introText");
+                introText.style.opacity = 1; // ทำให้ข้อความปรากฏ
+                introText.style.transition = "opacity 2s"; // ตั้งเวลาให้การปรากฏ
+                introText.style.display = "block"; // แสดงข้อความ
+                
+                // แสดง container หลังจากข้อความที่สองปรากฏ
+                setTimeout(function() {
+                    document.getElementById("surpriseContainer").style.display = "block"; // แสดง container
+                    
+                    // ทำให้รูปค่อย ๆ ปรากฏ
+                    const surpriseImage = document.getElementById("surpriseImage");
+                    surpriseImage.style.opacity = 1; // ทำให้รูปมองเห็น
+                    surpriseImage.style.transition = "opacity 1s"; // ตั้งเวลาให้การปรากฏ
+                }, 1000); // รอ 1 วินาทีก่อนแสดง container
+            }, 2000); // รอ 2 วินาทีก่อนแสดงข้อความที่สอง
+        };
+    </script>
+
+</body>
+</html>
