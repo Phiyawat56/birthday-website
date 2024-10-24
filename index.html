@@ -22,7 +22,7 @@
         }
 
         h1 {
-            font-size: 3em; /* ปรับขนาดให้เหมาะกับทั้งสองแพลตฟอร์ม */
+            font-size: 3em;
             margin: 20px 0;
             color: #ff69b4;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
@@ -31,7 +31,7 @@
         }
 
         p {
-            font-size: 1.2em; /* ปรับขนาดให้เหมาะกับทั้งสองแพลตฟอร์ม */
+            font-size: 1.2em;
             margin: 20px 0;
             opacity: 0;
             transition: opacity 2s;
@@ -59,14 +59,34 @@
         }
 
         img {
-            width: 100%; /* ปรับให้เต็มความกว้างของหน้าจอ */
-            max-width: 300px; /* ไม่ให้กว้างเกิน 300px */
+            width: 100%; /* ปรับให้เต็มความกว้างของ container */
+            max-width: 300px; /* ไม่ให้เกิน 300px */
             height: auto;
             border-radius: 15px;
             margin: 20px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             opacity: 0;
             transition: opacity 1s;
+        }
+
+        /* สไตล์สำหรับมือถือ */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            button {
+                width: 120px;
+                font-size: 1em;
+            }
+
+            img {
+                max-width: 90%; /* ให้ภาพเต็มหน้าจอมือถือ แต่ยังมีขอบ */
+            }
         }
 
         .container {
@@ -82,7 +102,6 @@
 
     <div class="container" id="surpriseContainer">
         <img src="b.jpg" alt="รูปของเรา" id="surpriseImage1">
-        
     </div>
 
     <audio id="lightSound" src="hbd.mp3" preload="auto"></audio>
@@ -112,11 +131,10 @@
                     // Show images with fade-in effect
                     document.getElementById("surpriseImage1").style.opacity = 1;
                     
-                }, 1000);
+                }, 2500);
             }, 2000);
         };
     </script>
 
 </body>
 </html>
-
